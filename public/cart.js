@@ -3,8 +3,8 @@ orderIds = []
 
 function getUserName() {
     $.ajax({
-        // url: 'http://localhost:5002/userObj',
-        url: 'https://arcane-forest-89383.herokuapp.com/userObj',
+        url: 'http://localhost:5002/userObj',
+        // url: 'https://arcane-forest-89383.herokuapp.com/userObj',
         type: 'GET',
         success: (userObj) => {
             $('.firstname').html(userObj.firstname)
@@ -49,8 +49,8 @@ function populateCart(items) {
 
 function getCartItems() {
     $.ajax({
-        // url: 'http://localhost:5002/cart/item',
-        url: 'https://arcane-forest-89383.herokuapp.com/cart/item',
+        url: 'http://localhost:5002/cart/item',
+        // url: 'https://arcane-forest-89383.herokuapp.com/cart/item',
         type: 'GET',
         success: populateCart
     })
@@ -63,8 +63,8 @@ function updateTotal() {
     newQuantity = $(`#quantity${pokemonId}`).val()
     newTotal = parseInt($(`#price${pokemonId}`).attr('value')) * newQuantity
     $.ajax({
-        // url: 'http://localhost:5002/cart/update',
-        url: 'https://arcane-forest-89383.herokuapp.com/cart/update',
+        url: 'http://localhost:5002/cart/update',
+        // url: 'https://arcane-forest-89383.herokuapp.com/cart/update',
         type: 'POST',
         data: {
             uniqueId: uniqueId,
@@ -79,8 +79,8 @@ function checkout() {
     userId = cartItems[0].userId
     time = new Date()
     $.ajax({
-        // url: 'http://localhost:5002/cart/checkout',
-        url: 'https://arcane-forest-89383.herokuapp.com/cart/checkout',
+        url: 'http://localhost:5002/cart/checkout',
+        // url: 'https://arcane-forest-89383.herokuapp.com/cart/checkout',
         type: 'POST',
         data: {
             userId: userId,
@@ -95,8 +95,8 @@ function checkout() {
 function removeItem() {
     itemId = $(this).attr('id')
     $.ajax({
-        // url: 'http://localhost:5002/cart/remove',
-        url: 'https://arcane-forest-89383.herokuapp.com/cart/remove',
+        url: 'http://localhost:5002/cart/remove',
+        // url: 'https://arcane-forest-89383.herokuapp.com/cart/remove',
         type: 'POST',
         data: {
             itemId: itemId
@@ -149,8 +149,8 @@ function populateOldOrders(orderedItems) {
 
 function getOldOrders() {
     $.ajax({
-        // url: 'http://localhost:5002/cart/orders',
-        url: 'https://arcane-forest-89383.herokuapp.com/cart/orders',
+        url: 'http://localhost:5002/cart/orders',
+        // url: 'https://arcane-forest-89383.herokuapp.com/cart/orders',
         type: 'GET',
         success: populateOldOrders
     })

@@ -3,11 +3,15 @@ const app = express()
 const https = require('https')
 const cors = require('cors')
 const path = require('path')
+const bcrypt = require('bcrypt')
 app.use(cors())
 app.set('view engine', 'ejs')
 const bodyparser = require("body-parser")
 const mongoose = require('mongoose')
 var session = require('express-session')
+const {
+    runInNewContext
+} = require('vm')
 
 app.use(session({
     secret: 'ljkdghfoh',
@@ -35,7 +39,8 @@ const userSchema = new mongoose.Schema({
     lastname: String,
     username: String,
     email: String,
-    password: String
+    password: String,
+    admin: Boolean
 })
 
 const orderSchema = new mongoose.Schema({
@@ -59,16 +64,31 @@ app.listen(process.env.PORT || 5002, (err) => {
         console.log(err)
 })
 
-app.get('/', function (req, res) {
-    console.log(req.session.authenticated)
-    if (req.session.authenticated) {
-        res.sendFile(path.join(__dirname + '/public/index.html'))
-    } else {
-        res.redirect('/login')
-    }
+app.get('/', auth, function (req, res) {
+    res.sendFile(path.join(__dirname + '/public/index.html'))
 })
 
 app.use(express.static('./public'))
+
+// Middleware
+
+function auth(req, res, next) {
+    if (req.session.authenticated) {
+        next()
+    } else {
+        res.redirect('/login')
+    }
+}
+
+function authAdmin(req, res, next) {
+    if (req.session.admin) {
+        next()
+    } else {
+        res.redirect('/login')
+    }
+}
+
+// Sign up
 
 app.get('/signup', function (req, res) {
     res.sendFile(path.join(__dirname + '/public/signup.html'))
@@ -80,15 +100,29 @@ app.put('/signup/create', function (req, res) {
         lastname: req.body.lastname,
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        admin: req.body.admin
     }, function (err, data) {
         if (err) {
             console.log('Error' + err)
         } else {
             console.log('Data' + data)
         }
-        res.send("New user created!")
+        res.sendFile(path.join(__dirname + '/public/login.html'))
     })
+})
+
+// login
+
+app.get('/login', function (req, res) {
+    console.log(req.session.authenticated)
+    if (req.session.authenticated && req.session.admin) {
+        res.redirect('/admin')
+    } else if (req.session.authenticated && !req.session.admin) {
+        res.redirect('/profile')
+    } else {
+        res.sendFile(path.join(__dirname + '/public/login.html'))
+    }
 })
 
 app.post('/login/authentication', function (req, res) {
@@ -103,8 +137,9 @@ app.post('/login/authentication', function (req, res) {
             return userObj.username == req.body.username
         })
 
-        if (user[0].password == req.body.password) {
+        if (user[0].password == req.body.password && user[0].admin) {
             req.session.authenticated = true
+            req.session.admin = user[0].admin
             req.session.userObj = {
                 userId: user[0]._id,
                 username: user[0].username,
@@ -112,7 +147,18 @@ app.post('/login/authentication', function (req, res) {
                 lastname: user[0].lastname,
                 email: user[0].email
             }
-            res.send('success')
+            res.send('admin')
+        } else if (user[0].password == req.body.password && !user[0].admin) {
+            req.session.authenticated = true
+            req.session.admin = user[0].admin
+            req.session.userObj = {
+                userId: user[0]._id,
+                username: user[0].username,
+                firstname: user[0].firstname,
+                lastname: user[0].lastname,
+                email: user[0].email
+            }
+            res.send('user')
         } else {
             req.session.authenticated = false
             res.send('fail')
@@ -120,18 +166,90 @@ app.post('/login/authentication', function (req, res) {
     })
 })
 
+// Admin
+
+app.get('/admin', authAdmin, function (req, res) {
+    res.sendFile(path.join(__dirname + '/public/admin.html'))
+})
+
+app.post('/admin/newUser', function (req, res) {
+    console.log(req.body)
+    userModel.create({
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+        admin: req.body.admin
+    }, function (err, data) {
+        if (err) {
+            console.log('Error' + err)
+        } else {
+            console.log('Data' + data)
+        }
+        if (req.body.admin == 'true') {
+            res.send('New admin user created!')
+        } else {
+            res.send('New user created!')
+        }
+    })
+})
+
+app.get('/admin/findUsers', function (req, res) {
+    userModel.find({}, function (err, users) {
+        if (err) {
+            console.log('Error' + err)
+        } else {
+            console.log('Users' + users)
+        }
+
+        resUsers = users.filter((userObj) => {
+            return userObj._id != req.session.userObj.userId
+        })
+        res.send(resUsers)
+    })
+})
+
+app.post('/admin/findUser', function (req, res) {
+    userModel.findById(req.body.userId,
+        async function (err, user) {
+            if (err) {
+                console.log('Error' + err)
+            } else {
+                console.log('Users' + user)
+            }
+            user.password = await bcrypt.hash(user.password, 12)
+            res.send(user)
+        })
+})
+
+app.post('/admin/updateUser', function (req, res) {
+    userModel.updateOne({
+        _id: req.body.userId
+    }, {
+        $set: {
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            username: req.body.username,
+            email: req.body.email,
+            admin: req.body.admin
+        }
+    }, function (err, user) {
+        if (err) {
+            console.log('Error' + err)
+        } else {
+            console.log('Users' + user)
+        }
+        res.send('User info updated!')
+    })
+})
+
+// other routes
+
 app.get('/userObj', function (req, res) {
     res.send(req.session.userObj)
 })
 
-app.get('/login', function (req, res) {
-    console.log(req.session.authenticated)
-    if (req.session.authenticated) {
-        res.redirect('/profile')
-    } else {
-        res.sendFile(path.join(__dirname + '/public/login.html'))
-    }
-})
 
 app.get('/profile', function (req, res) {
     if (req.session.authenticated) {
@@ -221,7 +339,7 @@ app.post('/cart/update', function (req, res) {
 })
 
 app.post('/cart/checkout', function (req, res) {
-    orderModel.update({
+    orderModel.updateOne({
         $and: [{
                 userId: req.body.userId
             },
@@ -268,7 +386,7 @@ app.post('/cart/remove', function (req, res) {
     })
 })
 
-app.get('/cart/orders', function(req,res){
+app.get('/cart/orders', function (req, res) {
     orderModel.find({}, function (err, data) {
         if (err) {
             console.log("Error " + err);
@@ -398,5 +516,13 @@ app.get('/pokemon/:id', function (req, res) {
                 'price': data.weight
             })
         })
+    })
+})
+
+// logout
+
+app.get('/logout', (req, res) => {
+    req.session.destroy(() => {
+        res.redirect('/login')
     })
 })

@@ -24,8 +24,8 @@ pokemonList = []
 
 function getUserName() {
     $.ajax({
-        // url: 'http://localhost:5002/userObj',
-        url: 'https://arcane-forest-89383.herokuapp.com/userObj',
+        url: 'http://localhost:5002/userObj',
+        // url: 'https://arcane-forest-89383.herokuapp.com/userObj',
         type: 'GET',
         success: (userObj) => {
             $('#firstname').html(userObj.firstname)
@@ -88,8 +88,8 @@ async function saveToCart() {
     pokemonName = $(this).attr('name')
     price = $(this).attr('id')
     await $.ajax({
-        // url: 'http://localhost:5002/cart/add',
-        url: 'https://arcane-forest-89383.herokuapp.com/cart/add',
+        url: 'http://localhost:5002/cart/add',
+        // url: 'https://arcane-forest-89383.herokuapp.com/cart/add',
         type: 'PUT',
         data: {
             pokemonId: pokemonId,

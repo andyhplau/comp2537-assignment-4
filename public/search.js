@@ -25,8 +25,8 @@ resultArray = null
 
 function getUserName() {
     $.ajax({
-        // url: 'http://localhost:5002/userObj',
-        url: 'https://arcane-forest-89383.herokuapp.com/userObj',
+        url: 'http://localhost:5002/userObj',
+        // url: 'https://arcane-forest-89383.herokuapp.com/userObj',
         type: 'GET',
         success: (userObj) => {
             $('#firstname').html(userObj.firstname)
@@ -209,7 +209,8 @@ function lastPage() {
 async function incrementLike() {
     buttonID = this.id
     await $.ajax({
-        url: `https://arcane-forest-89383.herokuapp.com/timeline/incrementHits/${buttonID}`,
+        url: `http://localhost:5002/timeline/incrementHits/${buttonID}`,
+        // url: `https://arcane-forest-89383.herokuapp.com/timeline/incrementHits/${buttonID}`,
         type: 'GET',
         success: (x) => {
             console.log(x)
@@ -221,7 +222,8 @@ async function incrementLike() {
 async function deleteHistory() {
     buttonID = this.id
     await $.ajax({
-        url: `https://arcane-forest-89383.herokuapp.com/timeline/delete/${buttonID}`,
+        url: `http://localhost:5002/timeline/delete/${buttonID}`,
+        // url: `https://arcane-forest-89383.herokuapp.com/timeline/delete/${buttonID}`,
         type: 'GET',
         success: (x) => {
             console.log(x)
@@ -248,7 +250,8 @@ function populateHistory(data) {
 
 function getHistory() {
     $.ajax({
-        url: 'https://arcane-forest-89383.herokuapp.com/timeline/read',
+        url: 'http://localhost:5002/timeline/read',
+        // url: 'https://arcane-forest-89383.herokuapp.com/timeline/read',
         type: 'GET',
         success: populateHistory
     })
@@ -259,7 +262,8 @@ async function storeIdHistory() {
     currentTime = new Date()
     console.log(searchedId)
     await $.ajax({
-        url: 'https://arcane-forest-89383.herokuapp.com/timeline/insert',
+        url: 'http://localhost:5002/timeline/insert',
+        // url: 'https://arcane-forest-89383.herokuapp.com/timeline/insert',
         type: 'PUT',
         data: {
             text: `A user had searched by ID:${searchedId}`,
@@ -277,7 +281,8 @@ async function storeNameHistory() {
     searchedName = $('#pokemonName').val()
     currentTime = new Date()
     await $.ajax({
-        url: 'https://arcane-forest-89383.herokuapp.com/timeline/insert',
+        url: 'http://localhost:5002/timeline/insert',
+        // url: 'https://arcane-forest-89383.herokuapp.com/timeline/insert',
         type: 'PUT',
         data: {
             text: `A user had searched by Name:${searchedName}`,
@@ -300,7 +305,8 @@ async function storeHistory(type_url) {
             typeName = typeData.name
             currentTime = new Date()
             $.ajax({
-                url: 'https://arcane-forest-89383.herokuapp.com/timeline/insert',
+                url: 'http://localhost:5002/timeline/insert',
+                // url: 'https://arcane-forest-89383.herokuapp.com/timeline/insert',
                 type: 'PUT',
                 data: {
                     text: `A user had searched by type:${typeName}`,
@@ -322,8 +328,8 @@ async function saveToCart() {
     pokemonName = $(this).attr('name')
     price = $(this).attr('id')
     await $.ajax({
-        // url: 'http://localhost:5002/cart/add',
-        url: 'https://arcane-forest-89383.herokuapp.com/cart/add',
+        url: 'http://localhost:5002/cart/add',
+        // url: 'https://arcane-forest-89383.herokuapp.com/cart/add',
         type: 'PUT',
         data: {
             pokemonId: pokemonId,
