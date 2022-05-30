@@ -6,8 +6,7 @@ async function storeNewUser() {
     password = $('#password').val()
     console.log(firstname, lastname, username, email, password)
     await $.ajax({
-        url: 'http://localhost:5002/signup/create',
-        // url: 'https://arcane-forest-89383.herokuapp.com/signup/create',
+        url: 'https://stark-wave-78109.herokuapp.com/signup/create',
         type: 'PUT',
         data: {
             firstname: firstname,

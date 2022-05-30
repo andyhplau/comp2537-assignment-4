@@ -1,6 +1,6 @@
 function loadUsers() {
     $.ajax({
-        url: 'http://localhost:5002/admin/findUsers',
+        url: 'https://stark-wave-78109.herokuapp.com/admin/findUsers',
         type: 'GET',
         success: (users) => {
             usersArray = ''
@@ -20,7 +20,7 @@ function createNewUser() {
     password = $('#password').val()
     admin = $('#admin option:selected').val()
     $.ajax({
-        url: 'http://localhost:5002/admin/newUser',
+        url: 'https://stark-wave-78109.herokuapp.com/admin/newUser',
         type: 'POST',
         data: {
             firstname: firstname,
@@ -39,7 +39,7 @@ function createNewUser() {
 function getUser() {
     user = $('#users option:selected').val()
     $.ajax({
-        url: 'http://localhost:5002/admin/findUser',
+        url: 'https://stark-wave-78109.herokuapp.com/admin/findUser',
         type: 'POST',
         data: {
             userId: user
@@ -89,7 +89,7 @@ function saveUser() {
     admin = $('#userAdmin option:selected').val()
     console.log(userId, firstname, lastname, username, email, admin)
     $.ajax({
-        url: 'http://localhost:5002/admin/updateUser',
+        url: 'https://stark-wave-78109.herokuapp.com/admin/updateUser',
         type: 'POST',
         data: {
             userId: userId,

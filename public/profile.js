@@ -1,16 +1,5 @@
 orderIds=[]
 
-// function getUserName() {
-//     $.ajax({
-//         url: 'http://localhost:5002/userObj',
-//         // url: 'https://arcane-forest-89383.herokuapp.com/userObj',
-//         type: 'GET',
-//         success: (userObj) => {
-//             $('.firstname').html(userObj.firstname)
-//         }
-//     })
-// }
-
 function populateUser(user){
     $('.firstname').html(user.firstname)
     $('#username').html(user.username)
@@ -20,8 +9,7 @@ function populateUser(user){
 
 async function getUserId() {
     await $.ajax({
-        url: 'http://localhost:5002/userObj',
-        // url: 'https://arcane-forest-89383.herokuapp.com/userObj',
+        url: 'https://stark-wave-78109.herokuapp.com/userObj',
         type: 'GET',
         success: populateUser
     })
@@ -72,8 +60,7 @@ function populateOldOrders(orderedItems) {
 
 function getOldOrders() {
     $.ajax({
-        url: 'http://localhost:5002/cart/orders',
-        // url: 'https://arcane-forest-89383.herokuapp.com/cart/orders',
+        url: 'https://stark-wave-78109.herokuapp.com/cart/orders',
         type: 'GET',
         success: populateOldOrders
     })

@@ -3,8 +3,7 @@ async function authenticateUser() {
     password = $('#password').val()
     console.log(username, password)
     await $.ajax({
-        url: 'http://localhost:5002/login/authentication',
-        // url: 'https://arcane-forest-89383.herokuapp.com/login/authentication',
+        url: 'https://stark-wave-78109.herokuapp.com/login/authentication',
         type: 'POST',
         data: {
             username: username,

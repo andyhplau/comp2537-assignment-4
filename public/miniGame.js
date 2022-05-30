@@ -19,7 +19,7 @@ function getResult() {
     record=''
     $('#gameRecord').empty()
     $.ajax({
-        url: 'http://localhost:5002/game/record',
+        url: 'https://stark-wave-78109.herokuapp.com/game/record',
         type: 'GET',
         success: loadResult
     })
@@ -107,7 +107,7 @@ function generateGameGrid() {
             clearInterval(timeTheGame)
             alert('You Win!')
             $.ajax({
-                url: 'http://localhost:5002/game/result',
+                url: 'https://stark-wave-78109.herokuapp.com/game/result',
                 type: 'POST',
                 data: {
                     result: 'win',
@@ -122,7 +122,7 @@ function generateGameGrid() {
             clearInterval(timeTheGame)
             alert('Time is up. You Lose!')
             $.ajax({
-                url: 'http://localhost:5002/game/result',
+                url: 'https://stark-wave-78109.herokuapp.com/game/result',
                 type: 'POST',
                 data: {
                     result: 'lose',
