@@ -55,9 +55,16 @@ const orderSchema = new mongoose.Schema({
     orderId: String
 })
 
+const gameSchema = new mongoose.Schema({
+    userId: String,
+    result: String,
+    time: String
+})
+
 const timeeventModel = mongoose.model("timeevents", timeeventSchema);
 const userModel = mongoose.model("users", userSchema)
 const orderModel = mongoose.model("orders", orderSchema)
+const gameModel = mongoose.model("games", gameSchema)
 
 app.listen(process.env.PORT || 5002, (err) => {
     if (err)
@@ -173,7 +180,6 @@ app.get('/admin', authAdmin, function (req, res) {
 })
 
 app.post('/admin/newUser', function (req, res) {
-    console.log(req.body)
     userModel.create({
         firstname: req.body.firstname,
         lastname: req.body.lastname,
@@ -244,7 +250,45 @@ app.post('/admin/updateUser', function (req, res) {
     })
 })
 
+// Game
+
+app.post('/game/result', function (req, res) {
+    gameModel.create({
+        userId: req.session.userObj.userId,
+        result: req.body.result,
+        time: req.body.time
+    }, function (err, data) {
+        if (err) {
+            console.log('Error' + err)
+        } else {
+            console.log('Data' + data)
+        }
+        res.send('Log created!')
+    })
+})
+
+app.get('/game/record', function (req, res) {
+    gameModel.find({
+        userId: req.session.userObj.userId
+    }, {}, {
+        $sort: {
+            _id: -1
+        }
+    }, function (err, data) {
+        if (err) {
+            console.log('Error' + err)
+        } else {
+            console.log('Data' + data)
+        }
+        res.send(data)
+    })
+})
+
 // other routes
+
+app.get('/miniGame', function (req, res) {
+    res.sendFile(path.join(__dirname + '/public/miniGame.html'))
+})
 
 app.get('/userObj', function (req, res) {
     res.send(req.session.userObj)

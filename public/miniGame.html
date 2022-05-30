@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Game</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./miniGame.js"></script>
+    <link rel="stylesheet" href="./miniGame.css">
+</head>
+
+<body>
+    <header>
+        <h1>Mini Game</h1>
+    </header>
+
+    <nav>
+        <a href="./search">Search your Pokemons!</a>
+        <a href="https://pokeapi.co">PokeAPI</a>
+        <a href="./miniGame">Mini Game</a>
+        <a href="./cart">Your Cart</a>
+        <a href="./logout">Logout</a>
+    </nav>
+
+    <main>
+        <div id="gameSetup">
+            <div id="pair">
+                <h4>Pokemon pairs</h4>
+                <label for="cardNumber">Number of Pokemon pairs:</label>
+                <select id="cardNumber"></select>
+            </div>
+            <div id="grid">
+                <h4>Grid size</h4>
+                <label for="row">Number of Rows:</label>
+                <select id="row"></select>
+                <label for="column">Number of Columns:</label>
+                <select id="column"></select>
+            </div>
+            <div id="difficulty">
+                <h4>Difficulty</h4>
+                <label for="level">Level:</label>
+                <select id="level">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+        </div>
+        <button id="submit">Submit</button>
+        <div id="time">
+            <h4 id="timeTitle"></h4>
+            <div id="timmer"></div>
+        </div>
+        <div id="gameGrid"></div>
+        <div>
+            <h4 style="text-align: center;">Record:</h4>
+            <div id="gameRecord"></div>
+        </div>
+    </main>
+
+    <footer>
+        <h4>
+            Copyright © PokeSearch-COMP2537-A4 2022
+        </h4>
+        <h5>
+            API used: <a href="https://pokeapi.co">PokeAPI</a>
+        </h5>
+    </footer>
+</body>
+
+</html>

@@ -7,10 +7,10 @@ async function authenticateUser() {
         // url: 'https://arcane-forest-89383.herokuapp.com/login/authentication',
         type: 'POST',
         data: {
-            // username: username,
-            // password: password
-            username: 'admin',
-            password: '1234'
+            username: username,
+            password: password
+            // username: 'admin',
+            // password: '1234'
         },
         success: (result) => {
             console.log(result)
@@ -30,8 +30,8 @@ async function authenticateUser() {
 }
 
 function setup() {
-    // $('body').on('click', '#login', authenticateUser)
-authenticateUser()
+    $('body').on('click', '#login', authenticateUser)
+// authenticateUser()
 }
 
 $(document).ready(setup)

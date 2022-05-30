@@ -58,7 +58,7 @@ function getUser() {
                 <label for="email">Email:</label>
                 <input type="text" id="userEmail" value="${userInfo.email}">
                 <br>
-                <label for="admin">Is it an admin account:</label>
+                <label for="userAdmin">Is it an admin account:</label>
                 <select id="userAdmin">`
             if (userInfo.admin) {
                 userArray += `
