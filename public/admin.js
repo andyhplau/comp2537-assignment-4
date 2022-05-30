@@ -33,7 +33,7 @@ function createNewUser() {
         },
         success: (res) => {
             alert(res)
-            loadUsers
+            loadUsers()
         }
     })
 }
