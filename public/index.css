@@ -1,0 +1,97 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: lightgoldenrodyellow;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #0C69C8;
+}
+
+nav a {
+    display: inline-block;
+    padding: 10px;
+    color: #F2D94E;
+}
+
+main {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav a:hover {
+    background-color: red;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+img {
+    width: 100%;
+}
+
+.pokemonContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+.pokemonContainer a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pokemonName {
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.pokemonID {
+    border: 1px solid black;
+    border-radius: 50px;
+    padding: 10px;
+}
+
+.cardContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pokemonCol {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-content: space-around;
+}
+
+@media screen and (max-width:550px) {
+    main,
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+}

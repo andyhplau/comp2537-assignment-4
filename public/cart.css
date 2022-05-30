@@ -1,0 +1,73 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: lightgoldenrodyellow;
+}
+
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #0C69C8;
+}
+
+nav a {
+    display: inline-block;
+    padding: 10px;
+    color: #F2D94E;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+ol {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+li {
+    display: flex;
+    justify-content: space-around;
+}
+
+h2 {
+    text-align: center;
+}
+
+#totalPrice {
+    display: flex;
+    justify-content: space-around;
+}
+
+.oldOrders {
+    text-align: center;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav a:hover {
+    background-color: red;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+@media screen and (max-width:550px) {
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+}

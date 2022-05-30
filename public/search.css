@@ -1,0 +1,129 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: lightgoldenrodyellow;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #0C69C8;
+}
+
+nav a {
+    display: inline-block;
+    padding: 10px;
+    color: #F2D94E;
+}
+
+main {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: space-around;
+    column-gap: 30px;
+    row-gap: 30px;
+    /* gap: 30px; */
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav a:hover {
+    background-color: red;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+img {
+    width: 90%;
+}
+
+.pokemonContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+.pokemonContainer a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pokemonName {
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.pokemonID {
+    border: 1px solid black;
+    border-radius: 50px;
+    padding: 10px;
+}
+
+.cardContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pokemonCol {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-content: space-around;
+}
+
+.search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pageButtons{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.history, .historySection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.eachHistory{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+}
+
+@media screen and (max-width:550px) {
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main{
+        grid-template-columns: auto;
+    }
+}

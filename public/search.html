@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search the Pokemons</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./search.js"></script>
+    <link rel="stylesheet" href="./search.css">
+</head>
+
+<body>
+    <header>
+        <h1>Search the Pokemons!</h1>
+    </header>
+    <nav>
+        <a href="./profile">Hi! <span id="firstname"></span></a>
+        <div class="search">
+            Search Pokemons by type:
+            <select name="pokeType" id="pokeType"></select>
+        </div>
+        <div class="search">
+            Search Pokemons by ID:
+            <input type="text" id="pokemonId">
+            <button id="idSearch">Search</button>
+        </div>
+        <div class="search">
+            Search Pokemons by Name:
+            <input type="text" id="pokemonName">
+            <button id="nameSearch">Search</button>
+        </div>
+        <a href="./cart">Your Cart</a>
+    </nav>
+
+    <div class="pageButtons"></div>
+
+    <main></main>
+
+    <div class="pageButtons"></div>
+    <hr>
+    <div class="historySection">
+        <h3>Searched History</h3>
+        <div class="history"></div>
+    </div>
+    <hr>
+    <footer>
+        <h4>
+            Copyright © PokeSearch-COMP2537-A1 2022
+        </h4>
+        <h5>
+            API used: <a href="https://pokeapi.ca">PokeAPI</a>
+        </h5>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= name %></title>
+    <link rel="stylesheet" href="/pokemon.css">
+</head>
+
+<body>
+    <header>
+        <h1>Details for <%= name %></h1>
+    </header>
+
+    <main>
+        <img src="<%= img_path %>" alt="">
+        <div id="details">
+            <p>ID: <%= id %></p>
+            <p>Name: <%= name %></p>
+            <p>Type: <%= type %></p>
+            <p>
+                Base HP: <%= hp %>
+                <progress id="file" value="<%= hp %>" max="255"> <%= hp %> </progress>
+            </p>
+            <p>Base Attack Points: <%= attack %></p>
+            <p>Base Defense Points: <%= defense %></p>
+            <p>Speed: <%= speed %></p>
+            <p>Height: <%= height %> dm</p>
+            <p>Weight: <%= weight %> hg</p>
+            <p>Abilities: <%= ability %></p>
+            <p>
+                Price: <%= price %>
+                <br>
+                <button class="addToCart" id="<%= id %>">Add to Cart</button>
+            </p>
+        </div>
+    </main>
+</body>
+
+</html>
