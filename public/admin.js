@@ -1,4 +1,5 @@
 function loadUsers() {
+    $('#users').empty()
     $.ajax({
         url: 'https://stark-wave-78109.herokuapp.com/admin/findUsers',
         type: 'GET',
@@ -32,6 +33,7 @@ function createNewUser() {
         },
         success: (res) => {
             alert(res)
+            loadUsers
         }
     })
 }
@@ -74,7 +76,8 @@ function getUser() {
             userArray += `
                 </select>
                 <br>
-                <button type="button" id="saveUser" value="${userInfo._id}">Save</button>`
+                <button type="button" id="saveUser" value="${userInfo._id}">Save</button>
+                <button type="button" id="deleteUser" value="${userInfo._id}">Delete User</button>`
             $('#user').html(userArray)
         }
     })
@@ -87,7 +90,6 @@ function saveUser() {
     username = $('#userUsername').val()
     email = $('#userEmail').val()
     admin = $('#userAdmin option:selected').val()
-    console.log(userId, firstname, lastname, username, email, admin)
     $.ajax({
         url: 'https://stark-wave-78109.herokuapp.com/admin/updateUser',
         type: 'POST',
@@ -101,10 +103,25 @@ function saveUser() {
         },
         success: (res) => {
             alert(res)
-            $('#user').empty()
             loadUsers()
         }
     })
+}
+
+function deleteUser(){
+userId=$(this).val()
+$.ajax({
+    url: 'https://stark-wave-78109.herokuapp.com/admin/remove',
+        type: 'POST',
+        data: {
+            userId: userId,
+        },
+        success: (res) => {
+            alert(res)
+            $('#user').empty()
+            loadUsers()
+        }
+})
 }
 
 function setup() {
@@ -112,6 +129,7 @@ function setup() {
     $('body').on('click', '#submit', createNewUser)
     $('body').on('click', '#getUser', getUser)
     $('body').on('click', '#saveUser', saveUser)
+    $('body').on('click', '#deleteUser', deleteUser)
 }
 
 $(document).ready(setup)

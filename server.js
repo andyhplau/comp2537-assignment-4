@@ -250,6 +250,19 @@ app.post('/admin/updateUser', function (req, res) {
     })
 })
 
+app.post('/admin/remove', function (req, res) {
+    userModel.remove({
+        _id: req.body.userId,
+    }, function (err, data) {
+        if (err) {
+            console.log("Error " + err)
+        } else {
+            console.log("Data " + data)
+        }
+        res.send('User deleted!')
+    })
+})
+
 // Game
 
 app.post('/game/result', function (req, res) {
